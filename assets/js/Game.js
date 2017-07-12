@@ -11,6 +11,35 @@ class Game {
         this.blocks=[];
     }
     preloaded(e){
+        createjs.Ticker.setFPS(60);
+        createjs.Ticker.addEventListener('tick', this.tick);
+        this.setup();
+        let gameMode = Math.floor(Math.random()*1);
+
+        switch(gameMode){
+            case 0://survive X zombies
+                //TODO ?
+                break;
+        }
+
+    }
+    setup(){
+        this.hero = new Hero('blue', 400, 150, {l:37, u:38, r:39, d:40});
+        this.stage.addChild(this.hero);
+        const canvas = document.querySelector('#action')
+        canvas.addEventListener('mousedown', e=>{
+            this.hero.firing=true;
+            this.hero.aimX=e.offsetX;
+            this.hero.aimY=e.offsetY;
+        });
+        canvas.addEventListener('mouseup', e=>{
+            this.hero.firing=false;
+        });
+        canvas.addEventListener('mousemove', e=>{
+            this.hero.aimX=e.offsetX;
+            this.hero.aimY=e.offsetY;
+        });
+
         for(let i=10; i>=0; i--){
             let z = new Zombie().setRandom({width:this.stage.canvas.width, height:this.stage.canvas.height});
             setTimeout(()=>{
@@ -21,23 +50,9 @@ class Game {
         let b = new Block('red', 100, 100, 300, 50);
         this.stage.addChild(b);
         this.blocks.push(b);
-
-        this.hero = new Hero('blue', 400, 150, {l:37, u:38, r:39, d:40});
-        this.stage.addChild(this.hero);
-        createjs.Ticker.setFPS(60);
-        createjs.Ticker.addEventListener('tick', this.tick);
-        document.querySelector('#action').addEventListener('mousedown', e=>{
-            this.hero.firing=true;
-            this.hero.aimX=e.offsetX;
-            this.hero.aimY=e.offsetY;
-        });
-        document.querySelector("#action").addEventListener('mouseup', e=>{
-            this.hero.firing=false;
-        });
-        document.querySelector("#action").addEventListener('mousemove', e=>{
-            this.hero.aimX=e.offsetX;
-            this.hero.aimY=e.offsetY;
-        });
+    }
+    tearDown(){
+        console.log("tearDown called")
     }
     moveZombies(){
         this.zombies.forEach(z=>{
@@ -86,6 +101,7 @@ class Game {
         this.zombies.forEach(z=>{
            if(Utils.distance(z,this.hero)<20){
                console.log("dead");
+               this.tearDown();
            }
         });
     }
@@ -96,6 +112,9 @@ class Game {
                     this.stage.removeChild(this.bullets[b],this.zombies[z]);
                     this.zombies.splice(z,1);
                     this.bullets.splice(b,1);
+                    if(this.zombies.length===0){
+                        this.tearDown()
+                    }
                     break;
                 }
             }
