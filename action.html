@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>World War Z</title>
+    <style>
+        canvas {
+            background: lightblue;
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="action" width="600" height="600"></canvas>
+    <script src="assets/lib/createjs-2015.11.26.min.js"></script>
+    <script src="assets/js/Game.js"></script>
+    <script src="assets/js/Preloader.js"></script>
+    <script>
+        //es6-plato -d platoreport/ assets/js/*.js
+        var SETTINGS = {
+            heroSpeed: 3,
+            zombieSpeed: 1,
+            bulletSpeed: 5
+        };
+        let game;
+        window.addEventListener('load', ()=>{
+
+            game = new Game("action");
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+{
+  "manifest":[
+    "assets/js/Zombie.js",
+    "assets/js/Utils.js",
+    "assets/js/Hero.js",
+    "assets/js/Bullet.js",
+    "assets/js/Weapon.js",
+    "assets/js/Block.js"
+  ]
+}
