@@ -4,10 +4,49 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>WWZ</title>
-
+    <style>
+        body {
+            position:relative;
+        }
+        #map {
+            height: 100vh;
+            background: lightblue;
+        }
+        .land
+        {
+            fill: green;
+            fill-opacity: 1;
+            stroke:white;
+            stroke-opacity: 1;
+            stroke-width:0.5;
+        }
+        #info {
+            /*TODO display flex for centering*/
+            position:absolute;
+            display:none;
+            left: calc(50vw - 150px);
+            top: calc(50vh - 100px);
+            width: 300px;
+            text-align:center;
+            border: 2px solid black;
+            border-radius: 10px;
+            padding: 10px;
+            background: darkred;
+            color:#fff;
+        }
+        .land:hover, .highlighted {
+            fill:darkgreen;
+        }
+    </style>
 </head>
 <body>
     <div id="map"></div>
+    <div id="info">
+        <h1></h1>
+        <h2>Population: <span></span></h2>
+        <h2>Infested: <span></span></h2>
+    </div>
+    <canvas id="action" width="600" height="600"></canvas>
 <script src="assets/js/main.js"></script>
 </body>
 </html>

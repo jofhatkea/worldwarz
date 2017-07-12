@@ -11,6 +11,7 @@ class Game {
         this.blocks=[];
     }
     preloaded(e){
+        console.log("preloaded", this)
         createjs.Ticker.setFPS(60);
         createjs.Ticker.addEventListener('tick', this.tick);
         this.setup();
