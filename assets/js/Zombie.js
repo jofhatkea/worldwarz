@@ -9,6 +9,7 @@ class Zombie extends createjs.Shape {
         this.x=200;
         this.y=200;
         this.damage=10;
+        this.lives=10;
         this.speed=SETTINGS.zombieSpeed;
         return this;
     }

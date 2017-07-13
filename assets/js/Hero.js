@@ -19,7 +19,7 @@ class Hero extends createjs.Shape {
         this.aimX=null;
         this.aimY=null;
         this.speed=SETTINGS.heroSpeed;
-        this.weapon = new Weapon(600, 5, 5, 3);
+        this.weapon = new Weapon(500, 5, 5, 10);
 
         window.addEventListener('keyup', e=>{
            switch(e.keyCode){

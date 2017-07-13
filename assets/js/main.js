@@ -22,6 +22,7 @@ class World {
     constructor(){
         this.countries = document.querySelectorAll('#map .land');
         this.info = document.querySelector("#info");
+        this.action = document.querySelector('#action');
         let data = localStorage.getItem('wwzData');
         if(data){
 
@@ -51,10 +52,10 @@ class World {
                 console.log(e.target);
                 SETTINGS = {
                     heroSpeed: 3,
-                    zombieSpeed: 1,
-                    bulletSpeed: 5
+                    zombieSpeed: 1
                 };
-               let game = new Game("action");
+                this.action.classList.add("overlay");
+                let game = new Game("action");
             })
         })
     }

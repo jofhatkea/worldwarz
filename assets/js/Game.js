@@ -54,6 +54,8 @@ class Game {
     }
     tearDown(){
         console.log("tearDown called")
+        //document.querySelector('#action').classList.remove("overlay");
+
     }
     moveZombies(){
         this.zombies.forEach(z=>{
@@ -110,11 +112,15 @@ class Game {
         for(let z=this.zombies.length-1; z>=0; z--){
             for(let b = this.bullets.length-1; b>=0; b--){
                 if(Utils.distance(this.bullets[b],this.zombies[z])<11){
-                    this.stage.removeChild(this.bullets[b],this.zombies[z]);
-                    this.zombies.splice(z,1);
+                    this.zombies[z].lives-=this.bullets[b].damage;
+                    this.stage.removeChild(this.bullets[b])
                     this.bullets.splice(b,1);
-                    if(this.zombies.length===0){
-                        this.tearDown()
+                    if(this.zombies[z].lives<1){
+                        this.stage.removeChild(this.zombies[z]);
+                        this.zombies.splice(z,1);
+                        if(this.zombies.length===0){
+                            this.tearDown()
+                        }
                     }
                     break;
                 }
@@ -122,13 +128,10 @@ class Game {
         }
     }
     tick(e){
-
         this.moveZombies();
         this.moveBullets();
         this.heroFires();
         this.hitDetection();
-
-
         this.hero.move();
         this.stage.update(e);
     }
